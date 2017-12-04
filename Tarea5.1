@@ -1,0 +1,16 @@
+data_targets = parametros.dat 
+image_targets = RadialVelocities.png
+
+Resultados_hw5.pdf : Resultados_hw5.tex $(image_targets) 
+
+$(image_targets) : Plots.py $(data_targets)
+	python $<
+
+$(data_targets) : a.out
+	./a.out
+
+a.out : CurvaRotacion.c
+	gcc -lm -g CurvaRotacion.c
+
+clean :
+	rm *.dat *.png a.out *.pdf
